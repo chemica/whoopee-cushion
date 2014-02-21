@@ -12,4 +12,40 @@ Wouldn't it be nice if you could access all your API response data like this?
 
 `obj.products.first.customer.customer_id`
 
-whoopee-cushion will let you do just that. It's a fast and
+whoopee-cushion will let you do just that. It's faster than using OpenStructs or any recursive algorithms based on them
+because it uses Ruby's faster Struct objects under the hood.
+
+Setup
+=====
+
+`gem install whoopee-cushion`
+
+or
+
+`gem "whoopee-cushion"`
+
+in your Gemfile.
+
+In your Ruby code:
+
+`require 'whoopee_cushion'`
+
+then
+
+`hash = {:a => 1, :CamelCase => 2, :c => 3, :d => { :e => 4, :f => [1,2,3,4,5]}}`
+
+`obj = WhoopeeCushion::Inflate.from_hash(hash)`
+
+`puts obj.a`
+`puts obj.camel_case`
+`puts obj.d.f.first`
+
+`json = '{"CamelCase": "no", "json": "yes"}'`
+
+You can also go straight from JSON, or turn off the automatic camel case conversion:
+
+`obj = WhoopeeCushion::Inflate.from_json(json, :to_snake_keys => false)`
+
+`puts obj.CamelCase`
+
+Have fun.
