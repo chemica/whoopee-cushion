@@ -1,17 +1,27 @@
 PATH
   remote: .
   specs:
-    whoopee_cushion (0.0.1)
+    whoopee-cushion (0.0.1)
 
 GEM
   remote: https://rubygems.org/
   specs:
+    byebug (2.6.0)
+      columnize (~> 0.3)
+      debugger-linecache (~> 1.2)
+    columnize (0.3.6)
+    debugger-linecache (1.2.0)
+    minitest (4.7.5)
     rake (10.1.1)
+    recursive-open-struct (0.4.5)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.3)
+  bundler (~> 1.5)
+  byebug
+  minitest (~> 4.7.3)
   rake
-  whoopee_cushion!
+  recursive-open-struct
+  whoopee-cushion!
