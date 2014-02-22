@@ -19,7 +19,7 @@ end
 
 describe 'converting keys to snake case' do
   before do
-    @json = { 'CaseOne' => 'FirstCase', 'caseTwo' => 'secondCase', 'case_three' => 'third_case' }
+    @json = { 'CaseOne' => 'FirstCase', 'caseTwo' => 'secondCase', 'case_three' => 'third_case', 'CASEFour' => '4' }
   end
 
   it 'should convert CamelCase' do
@@ -30,6 +30,11 @@ describe 'converting keys to snake case' do
   it 'should convert camelBack' do
     obj = WhoopeeCushion::Inflate.from_hash @json
     assert_equal 'secondCase', obj.case_two
+  end
+
+  it 'should convert CAMELCase with acronyms' do
+    obj = WhoopeeCushion::Inflate.from_hash @json
+    assert_equal '4', obj.case_four, "Could not find case_four: #{obj.inspect}"
   end
 
   it 'should not convert camel case with snake keys option false' do
