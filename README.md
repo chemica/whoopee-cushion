@@ -18,57 +18,49 @@ because it uses Ruby's faster Struct objects under the hood.
 Setup
 =====
 
-`
-gem install whoopee-cushion
-`
+`gem install whoopee-cushion`
 
 or
 
-`
-gem "whoopee-cushion"
-`
+`gem "whoopee-cushion"`
 
 in your Gemfile.
 
 In your Ruby code:
 
-`
-require 'whoopee_cushion'
-`
+`require 'whoopee_cushion'`
 
 then
 
-`
-hash = {:a => 1, :CamelCase => 2, :c => 3, :d => { :e => 4, :f => [1,2,3,4,5]}}
+`hash = {:a => 1, :CamelCase => 2, :c => 3, :d => { :e => 4, :f => [1,2,3,4,5]}}`
 
-obj = WhoopeeCushion::Inflate.from_hash(hash)
+`obj = WhoopeeCushion::Inflate.from_hash(hash)`
 
-puts obj.a
-puts obj.camel_case
-puts obj.d.f.first
-`
+`puts obj.a`
+
+`puts obj.camel_case`
+
+`puts obj.d.f.first`
 
 You can also go straight from JSON, or turn off the automatic camel case conversion:
 
-`
-json = '{"CamelCase": "no", "json": "yes"}'
+`json = '{"CamelCase": "no", "json": "yes"}'`
 
-obj = WhoopeeCushion::Inflate.from_json(json, :convert_keys => false)
+`obj = WhoopeeCushion::Inflate.from_json(json, :convert_keys => false)`
 
-puts obj.CamelCase
-`
+`puts obj.CamelCase`
 
 If you want to carry out your own string conversion, use a lambda:
 
-`
-hash = {:a => 1, :CamelCase => 2, :c => 3, :d => { :e => 4, :f => [1,2,3,4,5]}}
+`hash = {:a => 1, :CamelCase => 2, :c => 3, :d => { :e => 4, :f => [1,2,3,4,5]}}`
 
-obj = WhoopeeCushion::Inflate.from_hash(hash, :convert_keys => lambda {|s| '#{s}_foo'})
+`obj = WhoopeeCushion::Inflate.from_hash(hash, :convert_keys => lambda {|s| '#{s}_foo'})`
 
-puts obj.a_foo
-puts obj.CamelCase_foo
-puts obj.d_foo.f_foo.first
-`
+`puts obj.a_foo`
+
+`puts obj.CamelCase_foo`
+
+`puts obj.d_foo.f_foo.first`
 
 Performance
 ===========
