@@ -37,7 +37,7 @@ module WhoopeeCushion
       keys = []
       values = []
       hash.each do |k,v|
-        keys << (options[:to_snake_keys] == false ? k : underscore_key(k)).to_sym
+        keys << (options[:to_snake_keys] == false ? k : underscore_key(k, options)).to_sym
         values << from_object(v, options)
       end
       # Split the keys and values to arrays for 1: speed and 2: backwards compatibility with Ruby < 1.9
@@ -45,22 +45,10 @@ module WhoopeeCushion
       [keys, values]
     end
 
-    def self.underscore_key(key)
-      if key.is_a? Symbol
-        underscore(key.to_s)
-      elsif key.is_a? String
-        underscore(key)
-      else
-        key
-      end
-    end
-
-    def self.underscore(string)
-      string.gsub(/::/, '/').
-          gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
-          gsub(/([a-z\d])([A-Z])/,'\1_\2').
-          tr("-", "_").
-          downcase
+    def self.underscore_key(string, options)
+      string.to_s.gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
+                  gsub(/([a-z\d])([A-Z])/,'\1_\2').
+                  downcase
     end
   end
 end
