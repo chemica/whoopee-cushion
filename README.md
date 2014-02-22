@@ -54,7 +54,7 @@ If you want to carry out your own string conversion, use a lambda:
 
 `hash = {:a => 1, :CamelCase => 2, :c => 3, :d => { :e => 4, :f => [1,2,3,4,5]}}`
 
-`obj = WhoopeeCushion::Inflate.from_hash(hash, :convert_keys => lambda {|s| '#{s}_foo'})`
+`obj = WhoopeeCushion::Inflate.from_hash(hash, :convert_keys => lambda {|s| "#{s}_foo"})`
 
 `puts obj.a_foo`
 
