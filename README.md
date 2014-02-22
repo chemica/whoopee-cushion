@@ -32,20 +32,20 @@ In your Ruby code:
 
 then
 
-`hash = {:a => 1, :CamelCase => 2, :c => 3, :d => { :e => 4, :f => [1,2,3,4,5]}}`
+`hash = {:a => 1, :CamelCase => 2, :c => 3, :d => { :e => 4, :f => [1,2,3,4,5]}}
 
-`obj = WhoopeeCushion::Inflate.from_hash(hash)`
+obj = WhoopeeCushion::Inflate.from_hash(hash)
 
-`puts obj.a`
-`puts obj.camel_case`
-`puts obj.d.f.first`
-
-`json = '{"CamelCase": "no", "json": "yes"}'`
+puts obj.a
+puts obj.camel_case
+puts obj.d.f.first`
 
 You can also go straight from JSON, or turn off the automatic camel case conversion:
 
-`obj = WhoopeeCushion::Inflate.from_json(json, :to_snake_keys => false)`
+`json = '{"CamelCase": "no", "json": "yes"}
 
-`puts obj.CamelCase`
+obj = WhoopeeCushion::Inflate.from_json(json, :to_snake_keys => false)
+
+puts obj.CamelCase`
 
 Have fun.
