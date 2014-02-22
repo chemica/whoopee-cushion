@@ -16,7 +16,7 @@ def benchmarks
   puts "whoopee-cushion"
   puts Benchmark.measure {
     10000.times do
-      a = WhoopeeCushion::Inflate.from_hash hash, :to_snake_keys => false
+      a = WhoopeeCushion::Inflate.from_hash hash, :convert_keys => false
       raise 'Incorrect value found' if a.eeeeEeee.first.NameThe3[0] != 4
     end
   }
@@ -43,19 +43,21 @@ def benchmarks
 
   hash = {:a => 2, :b => 2, :c => 2, :d => 2, :e => 2,
           :f => 2, :g => 2, :h => 2, :i => 2, :j => 2,
-          :k => 2, :l => 2, :m => 2, :n => 2, :c => "Lorem Ipsum"}
+          :k => 2, :l => 2, :m => 2, :n => 2, :c1 => "Lorem Ipsum"}
 
 
   puts Benchmark.measure {
     10000.times do
-      WhoopeeCushion::Inflate.from_hash hash, :to_snake_keys => false
+      x = WhoopeeCushion::Inflate.from_hash hash, :convert_keys => false
+      x.c1
     end
   }
 
   puts "Benchmarking 10000 operations on light hash with camel case conversion:"
   puts Benchmark.measure {
     10000.times do
-      WhoopeeCushion::Inflate.from_hash hash
+      x = WhoopeeCushion::Inflate.from_hash hash
+      x.c1
     end
   }
 
@@ -64,6 +66,7 @@ def benchmarks
   puts Benchmark.measure {
     10000.times do
       x = OpenStruct.new(hash)
+      x.c1
     end
   }
 end

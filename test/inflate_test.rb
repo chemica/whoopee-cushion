@@ -38,17 +38,17 @@ describe 'converting keys to snake case' do
   end
 
   it 'should not convert camel case with snake keys option false' do
-    obj = WhoopeeCushion::Inflate.from_hash @json, :to_snake_keys => false
+    obj = WhoopeeCushion::Inflate.from_hash @json, :convert_keys => false
     assert_equal 'FirstCase', obj.CaseOne
   end
 
   it 'should not convert camel back with snake keys option false' do
-    obj = WhoopeeCushion::Inflate.from_hash @json, :to_snake_keys => false
+    obj = WhoopeeCushion::Inflate.from_hash @json, :convert_keys => false
     assert_equal 'secondCase', obj.caseTwo
   end
 
   it 'should leave snake case alone with snake keys option false' do
-    obj = WhoopeeCushion::Inflate.from_hash @json, :to_snake_keys => false
+    obj = WhoopeeCushion::Inflate.from_hash @json, :convert_keys => false
     assert_equal 'third_case', obj.case_three
   end
 
@@ -69,7 +69,7 @@ describe 'converting recursive hashes' do
   end
 
   it 'should not convert keys to snake case with snake keys option false' do
-    obj = WhoopeeCushion::Inflate.from_hash @json, :to_snake_keys => false
+    obj = WhoopeeCushion::Inflate.from_hash @json, :convert_keys => false
     assert_equal 'value', obj.CaseOne.caseTwo.ThisIsCaseThree
   end
 end
@@ -87,7 +87,7 @@ describe 'converting deep arrays' do
   end
 
   it 'should get deep array values correctly with snake keys option false' do
-    obj = WhoopeeCushion::Inflate.from_hash @json, :to_snake_keys => false
+    obj = WhoopeeCushion::Inflate.from_hash @json, :convert_keys => false
     assert_equal 2, obj.CaseOne[0].caseTwo
     assert_equal 'four', obj.CaseOne[0].CaseThree[0].CaseFour
     assert_equal 5, obj.CaseOne[0].CaseThree[1]
@@ -118,8 +118,17 @@ describe 'converting from array' do
     end
 
     it 'should convert an embedded hash without changing keys with snake keys option false' do
-      obj = WhoopeeCushion::Inflate.from_array @array, :to_snake_keys => false
+      obj = WhoopeeCushion::Inflate.from_array @array, :convert_keys => false
       assert_equal 'now', obj[4].ThePeople
     end
+  end
+end
+
+describe 'converting keys' do
+  it 'should use the lambda if possible' do
+    hash = {'power' => 'to', 'the_people' => 'now', 'bar' => {'interesting' => 'times'}}
+    obj = WhoopeeCushion::Inflate.from_hash hash, :convert_keys => lambda {|s| "#{s}_foo"}
+    assert_equal 'to', obj.power_foo
+    assert_equal 'times', obj.bar_foo.interesting_foo
   end
 end

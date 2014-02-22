@@ -53,9 +53,21 @@ You can also go straight from JSON, or turn off the automatic camel case convers
 `
 json = '{"CamelCase": "no", "json": "yes"}'
 
-obj = WhoopeeCushion::Inflate.from_json(json, :to_snake_keys => false)
+obj = WhoopeeCushion::Inflate.from_json(json, :convert_keys => false)
 
 puts obj.CamelCase
+`
+
+If you want to carry out your own string conversion, use a lambda:
+
+`
+hash = {:a => 1, :CamelCase => 2, :c => 3, :d => { :e => 4, :f => [1,2,3,4,5]}}
+
+obj = WhoopeeCushion::Inflate.from_hash(hash, :convert_keys => lambda {|s| '#{s}_foo'})
+
+puts obj.a_foo
+puts obj.CamelCase_foo
+puts obj.d_foo.f_foo.first
 `
 
 Performance
