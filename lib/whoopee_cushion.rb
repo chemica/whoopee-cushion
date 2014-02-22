@@ -26,24 +26,23 @@ module WhoopeeCushion
     end
 
     def self.from_hash(hash, options = {})
-      hash = process_hash hash, options
-      keys = hash.keys
-      model = Struct.new(*keys)
-      out = model.new
-      hash.each do |key, value|
-        out.send("#{key}=", self.from_object(value, options))
-      end
-      out
+      @iter ||= 1
+      keys, values = process_hash hash, options
+      Struct.new(*keys).new(*values)
     end
 
     private
 
     def self.process_hash hash, options
-      remap = hash.map do |key, value|
-        key = underscore_key key unless options[:to_snake_keys] == false
-        [key.to_sym, value]
+      keys = []
+      values = []
+      hash.each do |k,v|
+        keys << (options[:to_snake_keys] == false ? k : underscore_key(k)).to_sym
+        values << from_object(v, options)
       end
-      Hash[remap]
+      # Split the keys and values to arrays for 1: speed and 2: backwards compatibility with Ruby < 1.9
+      # where hashes are unordered
+      [keys, values]
     end
 
     def self.underscore_key(key)
