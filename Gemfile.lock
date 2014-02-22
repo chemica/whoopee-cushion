@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    whoopee-cushion (1.0.0)
+    whoopee-cushion (1.0.1)
 
 GEM
   remote: https://rubygems.org/
