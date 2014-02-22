@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["ben@chemica.co.uk"]
   spec.summary       = %q{Allow recursive inflation of JSON data into structs.}
   spec.description   = %q{Inflates JSON data recursively into structs to allow use of dot notation for data access.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/chemica/whoopee-cushion?source=c"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
