@@ -114,6 +114,7 @@ If you can increase performance (or otherwise improve the gem in any way) please
 If your JSON has numerical keys, you won't be able to access them using dot notation for obvious reasons. In this case
 you can `send` the key to the object instead.
 
+```ruby
 a = WhoopeeCushion::Inflate.from_hash({1=>2})
 => #<struct :"1"=2>
 
@@ -122,6 +123,7 @@ SyntaxError: (irb):113: no .<digit> floating literal anymore; put 0 before dot
 
 a.send('1')
 => 2
+```
 
 Also, this is a highly dynamic operation. If you use an IDE it will almost certainly complain about missing methods.
 
