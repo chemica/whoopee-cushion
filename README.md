@@ -100,6 +100,15 @@ obj.d_foo.f_foo.first
 => :a
 ```
 
+Type less words:
+
+```ruby
+include WhoopeeCushion
+
+Inflate.from_hash({a:1})
+=> #<struct a=1>
+```
+
 ## Performance
 
 Check the project out, bundle it and run the simple `rake benchmark` suite to see some figures. Comparisons are made
