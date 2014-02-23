@@ -11,10 +11,10 @@ customer_id = api_response['Products'].first['Customer']['CustomerId']
 You might prefer to use a cleaner, less fiddly and more beautiful syntax, like this:
 
 ```ruby
-obj.products.first.customer.customer_id
+customer_id = api_response.products.first.customer.customer_id
 ```
 
-THe whoopee-cushion gem creates a deep object model from any JSON (or hash) you throw at it. It's faster than using
+The whoopee-cushion gem creates a deep object model from any JSON (or hash) you throw at it. It's faster than using
 recursive algorithms based on OpenStructs because it uses Ruby's faster Struct objects under the hood. Because the
 conversion of keys to snake case is baked in, the hash tree only needs to be walked once, leading to a further
 performance benefit compared to using a combination of gems to obtain the desired result.
