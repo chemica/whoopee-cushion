@@ -42,7 +42,7 @@ require 'whoopee_cushion'
 then
 
 ```ruby
-hash = {:a => "first", :CamelCase => "camel", :c => "third", :d => { :e => 4, :camelBackCase => [1,2,3,4,5]}}
+hash = {:a => "first", :CamelCase => "camel", :c => "third", :d => { :e => 4, :camelBackCase => [1, 2, 3, 4, 5]}}
 obj = WhoopeeCushion::Inflate.from_hash(hash)
 
 puts obj.a
@@ -76,7 +76,7 @@ WhoopeeCushion::Inflate.from_array([1, 2, 3, {a => 4, b => 5}])
 If you're not sure whether you have an array or a hash for some reason, use from_object:
 
 ```ruby
-WhoopeeCushion::Inflate.from_object([1,2,3,{a:4, b:5}])
+WhoopeeCushion::Inflate.from_object([1, 2, 3, {a:4, b:5}])
 => [1, 2, 3, #<struct a=4, b=5>]
 
 WhoopeeCushion::Inflate.from_object({a:4, b:5})
