@@ -128,7 +128,7 @@ a = WhoopeeCushion::Inflate.from_hash({ 1=>2 })
 #=> #<struct :"1"=2>
 
 a.1
-SyntaxError: (irb):113: no .<digit> floating literal anymore; put 0 before dot
+#SyntaxError: (irb):113: no .<digit> floating literal anymore; put 0 before dot
 
 a.send('1')
 #=> 2
