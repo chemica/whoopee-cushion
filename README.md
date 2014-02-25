@@ -46,13 +46,13 @@ hash = { :a => "first", :CamelCase => "camel", :c => "third", :d => { :e => 4, :
 obj = WhoopeeCushion::Inflate.from_hash(hash)
 
 puts obj.a
-=> "first"
+#=> "first"
 
 obj.camel_case
-=> "camel"
+#=> "camel"
 
 puts obj.d.camel_back_case.first
-=> 1
+#=> 1
 ```
 
 You can also go straight from JSON, or turn off the automatic camel case conversion:
@@ -63,24 +63,24 @@ json = '{"CamelCase": "no", "json": "yes"}'
 obj = WhoopeeCushion::Inflate.from_json(json, :convert_keys => false)
 
 obj.CamelCase
-=> "no"
+#=> "no"
 ```
 
 If you have an array, you can use from_array:
 
 ```ruby
 WhoopeeCushion::Inflate.from_array([1, 2, 3, { a => 4, b => 5 }])
-=> [1, 2, 3, #<struct a=4, b=5>]
+#=> [1, 2, 3, #<struct a=4, b=5>]
 ```
 
 If you're not sure whether you have an array or a hash for some reason, use from_object:
 
 ```ruby
 WhoopeeCushion::Inflate.from_object([1, 2, 3, { a:4, b:5 }])
-=> [1, 2, 3, #<struct a=4, b=5>]
+#=> [1, 2, 3, #<struct a=4, b=5>]
 
 WhoopeeCushion::Inflate.from_object({a:4, b:5})
-=> #<struct a=4, b=5>
+#=> #<struct a=4, b=5>
 ```
 
 If you want to carry out your own string conversion for the keys, use a lambda:
@@ -91,13 +91,13 @@ hash = { :a => 1, :CamelCase => 2, :c => 3, :d => { :e => 4, :f => [:a, :b, :c, 
 obj = WhoopeeCushion::Inflate.from_hash(hash, :convert_keys => lambda { |s| "#{s}_foo" })
 
 obj.a_foo
-=> 1
+#=> 1
 
 obj.CamelCase_foo
-=> 2
+#=> 2
 
 obj.d_foo.f_foo.first
-=> :a
+#=> :a
 ```
 
 Type less stuff:
@@ -106,7 +106,7 @@ Type less stuff:
 include WhoopeeCushion
 
 Inflate.from_hash({ a: 1 })
-=> #<struct a=1>
+#=> #<struct a=1>
 ```
 
 ## Performance
@@ -125,13 +125,13 @@ you can `send` the key to the object instead.
 
 ```ruby
 a = WhoopeeCushion::Inflate.from_hash({ 1=>2 })
-=> #<struct :"1"=2>
+#=> #<struct :"1"=2>
 
 a.1
 SyntaxError: (irb):113: no .<digit> floating literal anymore; put 0 before dot
 
 a.send('1')
-=> 2
+#=> 2
 ```
 
 Also, this is a highly dynamic operation. If you use an IDE it will almost certainly complain about missing methods.
