@@ -39,7 +39,7 @@ In your Ruby code:
 require 'whoopee_cushion'
 ```
 
-then
+## Usage
 
 ```ruby
 hash = { :a => "first", :CamelCase => "camel", :c => "third", :d => { :e => 4, :camelBackCase => [1, 2, 3, 4, 5] } }
