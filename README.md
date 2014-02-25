@@ -42,7 +42,7 @@ require 'whoopee_cushion'
 then
 
 ```ruby
-hash = {:a => "first", :CamelCase => "camel", :c => "third", :d => { :e => 4, :camelBackCase => [1, 2, 3, 4, 5]}}
+hash = { :a => "first", :CamelCase => "camel", :c => "third", :d => { :e => 4, :camelBackCase => [1, 2, 3, 4, 5] } }
 obj = WhoopeeCushion::Inflate.from_hash(hash)
 
 puts obj.a
@@ -69,14 +69,14 @@ obj.CamelCase
 If you have an array, you can use from_array:
 
 ```ruby
-WhoopeeCushion::Inflate.from_array([1, 2, 3, {a => 4, b => 5}])
+WhoopeeCushion::Inflate.from_array([1, 2, 3, { a => 4, b => 5 }])
 => [1, 2, 3, #<struct a=4, b=5>]
 ```
 
 If you're not sure whether you have an array or a hash for some reason, use from_object:
 
 ```ruby
-WhoopeeCushion::Inflate.from_object([1, 2, 3, {a:4, b:5}])
+WhoopeeCushion::Inflate.from_object([1, 2, 3, { a:4, b:5 }])
 => [1, 2, 3, #<struct a=4, b=5>]
 
 WhoopeeCushion::Inflate.from_object({a:4, b:5})
@@ -86,9 +86,9 @@ WhoopeeCushion::Inflate.from_object({a:4, b:5})
 If you want to carry out your own string conversion for the keys, use a lambda:
 
 ```ruby
-hash = {:a => 1, :CamelCase => 2, :c => 3, :d => { :e => 4, :f => [:a, :b, :c, :d, :e]}}
+hash = { :a => 1, :CamelCase => 2, :c => 3, :d => { :e => 4, :f => [:a, :b, :c, :d, :e] } }
 
-obj = WhoopeeCushion::Inflate.from_hash(hash, :convert_keys => lambda {|s| "#{s}_foo"})
+obj = WhoopeeCushion::Inflate.from_hash(hash, :convert_keys => lambda { |s| "#{s}_foo" })
 
 obj.a_foo
 => 1
@@ -100,12 +100,12 @@ obj.d_foo.f_foo.first
 => :a
 ```
 
-Type less words:
+Type less stuff:
 
 ```ruby
 include WhoopeeCushion
 
-Inflate.from_hash({a:1})
+Inflate.from_hash({ a: 1 })
 => #<struct a=1>
 ```
 
@@ -124,7 +124,7 @@ If your JSON has numerical keys, you won't be able to access them using dot nota
 you can `send` the key to the object instead.
 
 ```ruby
-a = WhoopeeCushion::Inflate.from_hash({1=>2})
+a = WhoopeeCushion::Inflate.from_hash({ 1=>2 })
 => #<struct :"1"=2>
 
 a.1
